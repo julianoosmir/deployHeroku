@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import herodeply.app.exceptions.usuarioException;
 import herodeply.app.models.Usuario;
 import herodeply.app.services.UsuarioService;
 
@@ -25,7 +26,7 @@ public class UsuarioController {
 
 
     @GetMapping
-    public List<Usuario> buscarTodos() {
+    public List<Usuario> buscarTodos() throws usuarioException {
         return usuarioService.buscarTodos();
     }
 

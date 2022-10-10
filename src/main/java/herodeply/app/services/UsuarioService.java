@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import herodeply.app.exceptions.usuarioException;
 import herodeply.app.models.Usuario;
 import herodeply.app.repository.UsuarioRepository;
 
@@ -19,8 +20,12 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public List<Usuario> buscarTodos(){
-        return usuarioRepository.findAll();
+    public List<Usuario> buscarTodos() throws usuarioException{
+        List<Usuario> uOptional = usuarioRepository.findAll();
+        if(uOptional.size() != 0){
+            return usuarioRepository.findAll();
+        }
+        throw new usuarioException("nenhum usuario cadastrado");
     }
     public Usuario atualizar(Usuario usuario) {
         Optional<Usuario> UsuarioDB = usuarioRepository.findById(usuario.getId());
